@@ -8,3 +8,6 @@ Rails.application.routes.draw do
   #   get '/profile'    => 'devise/registrations#edit',   :as => :edit_user_registration
   # end
 end
+
+
+
