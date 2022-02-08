@@ -1,0 +1,64 @@
+<main class="flex flex-col h-screen">
+  <div class="flex flex-1 overflow-x-auto">
+    <div class="flex flex-1 flex-col">
+      <%= render 'shared/errors', obj: @article %>
+      <div class="flex flex-1 justify-center bg-blue-50 shadow-sm overflow-y-auto paragraph px-4 bg-cover bg-center" style="background-image: " >
+       
+        <%= form_with(model: @article,class: "w-full",remote: true) do |f| %>
+
+        <div class="mb-3 mt-8">
+           <%= f.text_field :title,class:"w-full p-2 text-sm border-gray-200 rounded-lg shadow-sm mb-5",placeholder:"Add a title here" %>
+      <div class="w-full">
+          <%= f.rich_text_area :content,class:"p-2 text-sm border-gray-200 bg-white rounded-lg shadow-sm customized-min-height" %>
+      </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="flex flex-col bg-blue-50 border-l-2 shadow-sm border-gray-200 w-1/3 p-4">
+       <div class="mb-3 mt-3 flex justify-between rounded-md border p-3">
+                <div class="w-full">
+                       <%= f.submit 'Publish',class: "px-4 py-2 rounded-md shadow text-sm font-medium  bg-green-400 w-full   text-white cursor-pointer"%>
+                </div>
+                <div class="ml-2 w-full">
+                        <%= f.submit 'Save as Draft',class: "px-4 py-2 rounded-md shadow text-sm font-medium w-full  bg-orange-400   text-white cursor-pointer" %>
+                </div>
+  <div class="ml-2">
+            <%= link_to articles_path,class:"flex items-center justify-center px-4 py-2  rounded-md shadow text-sm font-medium  bg-indigo-500   text-white" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg> <p class="ml-2"> Cancel </p>
+      <% end %>
+      </div>          
+ </div> 
+         <div class="w-full">
+            <label class="mx-2 mb-2" for="Author">Author</label>
+              <input type="text" id="Author" class="w-full px-2 py-2  text-sm border-gray-200 rounded-lg shadow-sm" readonly="true"  value="<%= current_user.first_name %>" />
+
+        </div>
+        <br>
+        <div class="w-full my-2 mb-2">
+            <%= f.label :category,class: "mx-2 mb-2" %>
+              <%= f.text_field :category,class: "w-full px-2 py-2 text-sm border-gray-200 rounded-lg shadow-sm" %>
+        </div>
+        <div class="w-full my-2 mb-2">
+            <%= f.label :tags,class: "mx-2" %>
+              <%= f.text_field :tags,class: "w-full px-2 py-2 text-sm border-gray-200 rounded-lg shadow-sm" %>
+        </div>
+            <div class="w-full my-2 mb-2">
+              <%= f.label :visibility,class: "mx-2 mb-3" %>
+            <%= f.select :visibility,Article.visibilities.keys,{},{class:"w-full px-2 py-2 text-sm border-gray-200 rounded-lg shadow-sm"} %>
+            </div>
+              <div class="w-full my-2 mb-2">
+            <label class="mx-2 mb-2" for="Author">Schedule</label>
+              <input type="datetime-local" class="w-full px-2 py-2 text-sm border-gray-200 rounded-lg shadow-sm"  />
+            </div>
+            <div class="w-full my-4 mb-3">
+              <%= f.label :version_note,class: "mx-2 mb-3" %>
+              <%= f.text_field :version_note,class: "w-full px-2 py-2 text-sm border-gray-200 rounded-lg shadow-sm" %>
+            </div>  
+          
+      <% end %>
+
+  </div>
+</main>

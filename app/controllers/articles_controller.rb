@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
 	before_action :authenticate_user!
+	before_action :set_article, only: [:show, :edit, :update, :destroy]
 
 	def index
 		@articles = Article.all
@@ -7,7 +8,6 @@ class ArticlesController < ApplicationController
 	end
 
 	def show
-		@article = Article.find(params[:id])
 	end
 
 	def new
@@ -22,6 +22,8 @@ class ArticlesController < ApplicationController
 			if @article.save
 				redirect_to @article
 				flash[:notice] = "Your Article has been Published"
+			else
+				render 'new'
 			end
 		elsif params[:commit] == 'Save as Draft'
 			@article = Article.new(article_params)
@@ -30,14 +32,33 @@ class ArticlesController < ApplicationController
 			if @article.save
 				redirect_to @article
 				flash[:notice] = "Your Article has been added to Drafts"
+			else
+				render 'new'
 			end
 		end
+	end
+
+	def edit
+	end
+
+	def update
+		if @article.update(article_params)
+			 flash[:notice] = "Article was updated successfully."
+			 redirect_to @article
+		else
+			redirect_to 'edit'
+		end
+
 	end
 
 	private
 
 	def article_params
-		params.require(:article).permit(:title,:content,:category,:tags)
+		params.require(:article).permit(:title,:content,:category,:tags,:visibility,:version_note)
 	end
 
+
+	def set_article
+		@article = Article.find(params[:id])
+	end
 end

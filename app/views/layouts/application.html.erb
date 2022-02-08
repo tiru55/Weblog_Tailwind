@@ -9,6 +9,7 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </head>
 
   <body>
@@ -16,7 +17,6 @@
           <%= render 'layouts/navbar' %>
       <% end %>
           <%= render 'layouts/messages' %>
-
     <%= yield %>
   </body>
       <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
