@@ -12,4 +12,6 @@
 
 7. rails s 
 
+8. sudo apt install imagemagick libvips
+
 You are good to go>>
