@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'pages#home'
   get 'dashboard',to: "pages#dashboard"
   resources :articles
-
+  resources :questions
   # devise_for :users do
   #   get '/profile'    => 'devise/registrations#edit',   :as => :edit_user_registration
   # end
