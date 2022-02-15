@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   
-  before_action :set_current_user
+  before_action :authenticate_user!
 
   def home
 
@@ -8,15 +8,11 @@ class PagesController < ApplicationController
 
   def dashboard
   end
+
+  def test
+  end
+
   
 
   private
-
-  def set_current_user
-       if current_user
-
-        else
-          redirect_to new_user_session_path
-        end  
-  end
 end

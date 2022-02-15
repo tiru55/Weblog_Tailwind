@@ -4,10 +4,11 @@ Rails.application.routes.draw do
   get 'dashboard',to: "pages#dashboard"
   resources :articles
   resources :questions
+  get 'test', to: "pages#test"
   # devise_for :users do
   #   get '/profile'    => 'devise/registrations#edit',   :as => :edit_user_registration
   # end
-end
+end 
 
 
 

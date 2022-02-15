@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_09_061150) do
+ActiveRecord::Schema.define(version: 2022_02_15_065638) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -50,6 +50,15 @@ ActiveRecord::Schema.define(version: 2022_02_09_061150) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "answers", force: :cascade do |t|
+    t.text "answer"
+    t.integer "user_id"
+    t.integer "question_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["question_id"], name: "index_answers_on_question_id"
+  end
+
   create_table "articles", force: :cascade do |t|
     t.string "article_id"
     t.string "title"
@@ -62,6 +71,16 @@ ActiveRecord::Schema.define(version: 2022_02_09_061150) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "visibility"
     t.string "version_note"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string "question"
+    t.string "category"
+    t.string "tags"
+    t.integer "user_id"
+    t.integer "visibility"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -84,4 +103,5 @@ ActiveRecord::Schema.define(version: 2022_02_09_061150) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "answers", "questions"
 end
