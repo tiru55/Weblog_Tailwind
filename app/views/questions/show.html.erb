@@ -1,6 +1,12 @@
-<%= @question.question %>
-<%= @question.visibility %>
-<%= @question.category %>
-<%= @question.tags %>
-<%= @question.user_id %>
-<%= @question.created_at %>
+<body class="bg-gray-50">
+    <div class="my-2">
+        <div class="flex justify-center">
+        <div class="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
+            <h5 class="text-gray-900 text-xl leading-tight font-medium mb-2"><%= @question.created_at.to_formatted_s(:short) %></h5>
+            <p class="text-gray-700 text-base mb-4">
+                    <%= @question.question %>
+            </p>
+        </div>
+        </div>
+    </div>
+</body>

@@ -3,6 +3,6 @@ class Question < ApplicationRecord
     belongs_to :user    
     enum visibility: {
         Public: 1,
-        Private: 2
+        Draft: 2
     }
 end
