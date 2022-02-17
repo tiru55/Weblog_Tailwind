@@ -8,12 +8,12 @@
         </p>
       </div>  
        <div class="ml-1 sm:px-1 sm:py-1">
-              <button class="flex items-center justify-center px-3 py-2  rounded-md shadow text-sm font-medium  bg-blue-500  text-white">
+              <%= link_to new_user_path,class: "flex items-center justify-center px-3 py-2  rounded-md shadow text-sm font-medium  bg-blue-500  text-white" do %>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                 </svg>
                    <p class="ml-3">Add an User</p>
-              </button>
+              <% end %>
       </div>
     </div>
   </div>
@@ -66,7 +66,7 @@
                 <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
                     <table class="min-w-full leading-normal">
                         <thead>
-                            <tr class="bg-violet-400 text-white">
+                            <tr class="bg-indigo-400 text-white">
                                 <th
                                     class="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase">
                                     User
