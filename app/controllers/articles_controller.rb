@@ -8,7 +8,8 @@ class ArticlesController < ApplicationController
 	end
 
 	def show
-		
+		@comment = Comment.new
+		@comments = @article.comments.order("created_at DESC")
 	end
 
 	def new

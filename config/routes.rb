@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
   root 'pages#home'
   get 'dashboard',to: "pages#dashboard"
-  resources :articles
+  resources :articles do
+      resources :comments
+  end
   resources :questions
   resources :users
   get 'test', to: "pages#test"

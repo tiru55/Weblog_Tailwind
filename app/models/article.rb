@@ -3,6 +3,8 @@ class Article < ApplicationRecord
 	belongs_to :user
 	after_save :create_article_id
 	
+	has_many :comments,dependent: :destroy
+
 	enum status: {
 		Draft: 0,
 		Published: 1,
