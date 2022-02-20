@@ -53,6 +53,11 @@ class ArticlesController < ApplicationController
 
 	end
 
+	def destroy
+		@article.destroy
+		redirect_to articles_path, :notice => "Your Article has been Deleted..!"	
+	end
+
 	private
 
 	def article_params
