@@ -12,8 +12,14 @@
   <%= render "devise/shared/error_messages", resource: resource %>
   
   <div class="rounded-md shadow-sm space-y-px mb-3">
+   <div>
+    <%= f.text_field  :first_name, autofocus: true, autocomplete: "first-name",class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm",placeholder: "First Name" %>
+  </div>
+   <div>
+    <%= f.text_field :last_name, autofocus: true, autocomplete: "first-name",class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm",placeholder: "Last Name" %>
+  </div>
   <div>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email",class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm",placeholder: "Email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email",class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm",placeholder: "Email" %>
   </div>
 
   <div>
