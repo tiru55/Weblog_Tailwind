@@ -2,10 +2,10 @@
 
 one:
   answer: MyText
-  user_id: 1
   question: one
+  user: one
 
 two:
   answer: MyText
-  user_id: 1
   question: two
+  user: two

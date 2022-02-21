@@ -1,9 +1,15 @@
 class QuestionsController < ApplicationController
     before_action :authenticate_user!
+    before_action :set_question, only: [:show]
     
     def index
         @questions = Question.all
     end
+
+    def show
+        @answer = Answer.new
+		@answers = @question.answers
+    end 
 
     def new
         @question = Question.new
@@ -20,13 +26,15 @@ class QuestionsController < ApplicationController
         end
     end
 
-    def show
-        @question = Question.find(params[:id])
-    end
+  
 
     private
 
     def question_params
         params.require(:question).permit(:question, :visibility, :category, :tags)
+    end
+
+    def set_question
+        @question = Question.find(params[:id])
     end
 end

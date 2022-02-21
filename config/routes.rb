@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   resources :articles do
       resources :comments
   end
-  resources :questions
+  resources :questions do
+      resources :answers
+  end
   resources :users
   get 'test', to: "pages#test"
   # devise_for :users do

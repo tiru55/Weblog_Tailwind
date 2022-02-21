@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_19_161001) do
+ActiveRecord::Schema.define(version: 2022_02_20_153751) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -52,11 +52,12 @@ ActiveRecord::Schema.define(version: 2022_02_19_161001) do
 
   create_table "answers", force: :cascade do |t|
     t.text "answer"
-    t.integer "user_id"
     t.integer "question_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["question_id"], name: "index_answers_on_question_id"
+    t.index ["user_id"], name: "index_answers_on_user_id"
   end
 
   create_table "articles", force: :cascade do |t|
@@ -114,6 +115,7 @@ ActiveRecord::Schema.define(version: 2022_02_19_161001) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "answers", "questions"
+  add_foreign_key "answers", "users"
   add_foreign_key "comments", "articles"
   add_foreign_key "comments", "users"
 end

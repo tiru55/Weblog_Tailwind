@@ -1,12 +1,115 @@
-<body class="bg-gray-50">
-    <div class="my-2">
-        <div class="flex justify-center">
-        <div class="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
-            <h5 class="text-gray-900 text-xl leading-tight font-medium mb-2"><%= @question.created_at.to_formatted_s(:short) %></h5>
-            <p class="text-gray-700 text-base mb-4">
-                    <%= @question.question %>
-            </p>
-        </div>
+<body class="bg-blue-50">
+    <div class="my-2 min-h-screen">
+        <div class="grid grid-cols-4 gap-2 mx-3">
+                <div class="col-span-3">
+                    <!-- Jumbotron -->
+                    <div class="p-6 shadow rounded-lg bg-white text-gray-700">
+                        <h2 class="font-semibold text-3xl mb-5"><%= @question.question %>?</h2>
+                        <p class="mt-3 text-md">By <%= User.find(@question.user_id).first_name %> at <%= @question.created_at.to_formatted_s(:short) %> </p>
+                        <hr class="my-6 border-gray-300" />
+                         <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                            <button class="flex justify-center items-center px-2 py-1 text-gray-600">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 inline fill-blue-500 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                                                </svg>
+                                                <span class="ml-2 text-lg">Like</span>
+                                            </button>
+                                            <button class="ml-3 flex justify-center items-center px-2 py-1 text-gray-600">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 inline fill-pink-500 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                                                </svg>
+                                                <span class="ml-2 text-lg">Comment</span>
+                                            </button>
+
+                                </div>
+                                
+                                <div>
+                                          <div x-data="{ open: false }">
+                                            <button @click="open = true" :aria-expanded="show ? 'true' : 'false'" :class="{ 'active': show }" class="ml-3 flex justify-center items-center px-2 py-1 text-gray-600">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 inline fill-green-500 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                                                    </svg>
+                                                    <span class="ml-2 text-lg">Answer</span>
+                                            </button>
+                                            <div class="absolute top-0 left-0 flex items-center justify-center w-full h-full" style="background-color: rgba(0,0,0,.5);" x-show="open"  >
+                                                    <!-- A basic modal dialog with title, body and one button to close -->
+                                                    <div class="h-auto w-full p-4 mx-2 text-left bg-white rounded shadow-xl md:max-w-xl md:p-6 lg:p-8 md:mx-0" @click.away="open = false">
+                                                    <div class="mx-3">
+                                                        <div class="text-lg font-medium leading-6 text-gray-900 p-4 border-b border-gray-200 rounded-t-md">
+                                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline fill-green-500 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                                                            </svg>
+                                                            <span class="ml-1">Add your Answer!</span>
+                                                        </div>
+                                                        <div class="mt-4">                             
+                                                                <%= form_with model: [@question, @answer],local: true do |f| %> 
+                                                                    <div class="flex justify-center">
+                                                                            <%= f.text_area :answer,class: "w-full px-3 text-gray-700 bg-white border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none", placeholder: "Start your answer here..." %></textarea>
+                                                                    </div>
+                                                                
+                                                                    
+                                                            </div>
+                                                    </div>
+
+                                                                <!-- One big close button.  --->
+                                                                    <div class="mt-3 sm:mt-6">
+                                                                        <span class="flex justify-cemter w-full rounded-md shadow-sm">
+                                                                                    <%= f.submit 'Submit',class: "w-full px-4 py-2 text-white bg-green-500 rounded hover:bg-green-700" %>
+                                                                <% end %>
+                                                                            <button @click="open = false" class="ml-2 w-full px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700">
+                                                                                Close
+                                                                            </button>
+                                                                        </span>
+                                                                    </div>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                    </div>
+                    <!--  End of Jubotron -->
+                    
+                </div>
+                <% @answers.each do |answer| %>
+                        <div class="max-w-5xl px-10 my-4 py-6 bg-white rounded-lg shadow-md mb-5">
+                            <div class="flex justify-between items-center">
+                                <span class="font-light text-gray-600"><%= answer.created_at.to_formatted_s(:short) %></span>
+                                <a class="px-2 bg-emerald-500 text-white text-sm rounded-full hover:bg-gray-500" href="#"><%= %></a>
+                            </div>
+                            <div class="mt-2">
+                                <p class="mt-2 text-gray-600"><%= answer.answer %></p>
+                            </div>
+                            <div class="flex justify-between items-center mt-4">
+                               <div>
+                                   <button class="">
+                                       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6s" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                                        </svg>
+                                   </button>
+
+                                   <button class="ml-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                                        </svg>
+                                   </button>
+                                        <button class="ml-3" @click="open = ! open">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
+                                                </svg>
+                                        </button>
+                                      
+                               </div>
+
+                                <div>
+                                    <a class="flex items-center" href="#">
+                                        <img class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block" src="https://images.unsplash.com/photo-1502980426475-b83966705988?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=373&q=80" alt="avatar">
+                                        <h1 class="text-gray-700 font-bold"><%= answer.user.first_name  %></h1>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
+               
         </div>
     </div>
 </body>
