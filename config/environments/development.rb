@@ -29,12 +29,24 @@ Rails.application.configure do
 
     config.cache_store = :null_store
   end
-
+  config.action_mailer.asset_host = 'ec2-18-116-65-225.us-east-2.compute.amazonaws.com'
+config.action_mailer.delivery_method = :smtp
+config.action_mailer.smtp_settings = {
+  :address              => 'smtp.gmail.com',
+  :port                 => 587,
+  :domain               => 'myprojectdomain.com',
+  :user_name            => 'laravelautomation@gmail.com',
+  :password             => 'Laravel@123',
+  :authentication       => 'plain',
+  :enable_starttls_auto => true  }
+  
+  config.hosts << "ec2-18-116-65-225.us-east-2.compute.amazonaws.com"
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
 
   config.action_mailer.perform_caching = false
 
@@ -60,8 +72,7 @@ Rails.application.configure do
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true
-  config.hosts << "ec2-18-116-65-225.us-east-2.compute.amazonaws.com"
-  config.hosts << "18.116.65.225"
+
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 
@@ -71,10 +82,9 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
-  ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
-    html_tag.html_safe
-  end
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
 end

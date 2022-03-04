@@ -22,6 +22,7 @@ class ArticlesController < ApplicationController
 			@article.user_id = current_user.id
 			@article.status = 1
 			if @article.save
+				ArticleMailer.with(user: current_user,article: @article).article_created.deliver_later
 				redirect_to @article
 				flash[:notice] = "Your Article has been Published"
 			else
@@ -46,6 +47,7 @@ class ArticlesController < ApplicationController
 	def update
 		if @article.update(article_params)
 			 flash[:notice] = "Article was updated successfully."
+			 ArticleMailer.with(user: current_user,article: @article).article_updated.deliver_later
 			 redirect_to @article
 		else
 			redirect_to 'edit'
