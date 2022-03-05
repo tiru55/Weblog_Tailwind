@@ -57,6 +57,7 @@ class ArticlesController < ApplicationController
 
 	def destroy
 		@article.destroy
+		ArticleMailer.with(user: current_user,article: @article).article_destroyed.deliver_later
 		redirect_to articles_path, :notice => "Your Article has been Deleted..!"	
 	end
 
