@@ -37,7 +37,7 @@ config.action_mailer.smtp_settings = {
   :domain               => 'myprojectdomain.com',
   :user_name            => 'laravelautomation@gmail.com',
   :password             => 'Laravel@123',
-  :authentication       => 'plain',
+  :authentication       => 'plain', 
   :enable_starttls_auto => true  }
   
   config.hosts << "ec2-18-116-65-225.us-east-2.compute.amazonaws.com"
@@ -47,7 +47,7 @@ config.action_mailer.smtp_settings = {
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
-
+  config.assets.initialize_on_precompile = false
   config.action_mailer.perform_caching = false
 
   # Print deprecation notices to the Rails logger.
