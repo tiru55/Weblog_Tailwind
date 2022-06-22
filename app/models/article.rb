@@ -4,7 +4,7 @@ class Article < ApplicationRecord
 	after_save :create_article_id
 	
 	has_many :comments,dependent: :destroy
-
+	has_one_attached :banner
 	enum status: {
 		Draft: 0,
 		Published: 1,

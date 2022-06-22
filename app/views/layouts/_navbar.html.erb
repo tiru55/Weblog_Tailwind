@@ -60,7 +60,11 @@
           <div>
             <button type="button" class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white transition duration-150 ease-in-out" id="user-menu-button" aria-expanded="false" aria-haspopup="true" @click="open = true">
               <span class="sr-only">Open user menu</span>
-             <img class="w-8 h-8 rounded-full" src="https://ui-avatars.com/api/?name=<%= current_user.first_name%>+<%= current_user.last_name%>&background=ff6699&color=fff" alt="avatar">
+              <% if current_user.avatar.attached? %>
+                <%= image_tag current_user.avatar,class:"w-8 h-8 rounded-full"  %>
+              <% else %>
+              <img class="w-8 h-8 rounded-full" src="https://ui-avatars.com/api/?name=<%= current_user.first_name%>+<%= current_user.last_name%>&background=ff6699&color=fff" alt="avatar">
+              <% end %>
             </button>
           </div>
 

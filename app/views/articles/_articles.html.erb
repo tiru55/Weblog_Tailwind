@@ -116,7 +116,11 @@
                                     <td class="pr-6 whitespace-no-wrap">
                                         <div class="flex items-center">
                                             <div class="h-8 w-8">
-                                                <img class="w-8 h-8 rounded-full overflow-hidden shadow" src="https://ui-avatars.com/api/?name=<%= article.user.first_name%>+<%= article.user.last_name%>&background=0D8ABC&color=fff" alt="avatar">
+                                                <% if article.user.avatar.attached? %>
+                                                    <%= image_tag article.user.avatar,class: "w-8 h-8 rounded-full overflow-hidden shadow",alt: "user avatar" %>
+                                                <% else %>
+                                                    <img class="w-8 h-8 rounded-full overflow-hidden shadow" src="https://ui-avatars.com/api/?name=<%= article.user.first_name %>+<%= article.user.last_name %>&background=0D8ABC&color=fff" alt="user avatar">
+                                                <% end %>
                                             </div>
                                             <p class="ml-2 text-gray-800 dark:text-gray-100 tracking-normal leading-4 text-sm"><%= article.user.first_name %></p>
                                         </div>
@@ -128,6 +132,7 @@
                                     </td>
                                     <td class="pr-8">
                                     <div class="flex justify-center">
+                                     <% if current_user.role.include?("Admin") %>
                                        <%= link_to edit_article_path(article),class: "" do %>
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
@@ -138,6 +143,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                                 </svg>
                                        <% end %>
+                                     <% end  %>
                                     </div>
                                     </td>
                                 </tr>                               
@@ -147,40 +153,65 @@
                     </div>
                 </div>         
 </div>
-<div id="card-view">
-<% @articles.each do |a| %>
-    <div class="max-w-5xl px-10 my-4 py-4 bg-white rounded-lg shadow-md mb-5 mx-2" >
-        <div class="flex justify-between items-center">
-            <a class="px-2 bg-emerald-500 text-white text-sm rounded-full hover:bg-gray-500" href="#"><%= a.tags %></a>
-        </div>
-        <div class="mt-4">
-            <a href="" class="text-gray-700 font-bold hover:text-gray-600"><%= link_to a.title,article_path(a),class:"text-xl" %></a>
-        </div>
-        <div class="flex justify-between items-center mt-4">
-        <div>
-            <button class="">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6s" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
-                    </svg>
-            </button>
-            <button class="ml-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                    </svg>
-            </button>
-                    <button class="ml-3" @click="open = ! open">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
-                            </svg>
-                    </button>         
-        </div>
-            <div>
-                <a class="flex items-center" href="#">
-                    <img class="w-10 h-10 object-cover rounded-full hidden sm:block" src="https://ui-avatars.com/api/?name=<%= User.find(a.user_id).first_name %>+<%= User.find(a.user_id).last_name %>&background=0D8ABC&color=fff" alt="avatar">
-                    <h1 class="ml-2 text-gray-700 font-bold"><%= User.find(a.user_id).first_name %></h1>
-                </a>
+<div id="blogView">
+    <section class="body-font text-gray-600">
+      <div class="container mx-auto px-5 py-5">
+            <div class="-m-4 flex flex-wrap">
+                <!--start here-->
+                <% @articles.each do |art| %>
+                    <div class="p-4 md:w-3/12">
+                        <div class="h-full bg-white overflow-hidden rounded-lg border-2 border-gray-200 border-opacity-60">
+                        <div class="w-full">
+                            <div class="flex w-full p-2">
+                            <div class="p-2">
+                                <% if art.user.avatar.attached? %>
+                                    <%= image_tag art.user.avatar,class: "h-10 w-10 overflow-hidden rounded-full shadow" %>
+                                <% else %>
+                                    <img src="https://ui-avatars.com/api/?name=<%= art.user.first_name %>+<%= art.user.last_name %>&background=0D8ABC&color=fff" alt="author" class="h-10 w-10 overflow-hidden rounded-full shadow" />
+                                <% end %>
+                            </div>
+                            <div class="pl-2 pt-2">
+                                <p class="font-bold"><%= User.find(art.user_id).first_name %></p>
+                                <p class="text-xs"><%= art.created_at.strftime("%d %b %Y %I:%M %p")  %></p>
+                            </div>
+                            </div>
+                        </div>
+                        <% if art.banner.attached? %>
+                            <%= image_tag art.banner,class: "w-full object-cover object-center md:h-36 lg:h-48" %>
+                        <% else %>
+                            <img class="w-full object-cover object-center md:h-36 lg:h-48" src="https://firebasestorage.googleapis.com/v0/b/thecaffeinecode.appspot.com/o/blog.jpg?alt=media&token=271cb624-94d4-468d-a14d-455377ba75c2" alt="blog cover" />
+                        <% end %>
+                        <div class="p-4">
+                            <h2 class="title-font mb-1 text-xs font-bold uppercase tracking-widest text-green-400"><%= art.tags %></h2>
+                            <h1 class="title-font mb-3 text-lg font-medium text-gray-900"><%= link_to art.title,article_path(art.id) %></h1>
+                            <div class="flex flex-wrap items-center">
+                            <a href="/" class="text-green-800 md:mb-2 lg:mb-0">
+                                <p class="inline-flex items-center">
+                                    <%= link_to "Read Article",article_path(art.id),class: "text-blue-500" %>
+                                <svg class="ml-2 h-4 w-4" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M5 12h14"></path>
+                                    <path d="M12 5l7 7-7 7"></path>
+                                </svg>
+                                </p>
+                            </a>
+                            <span class="mr-3 ml-auto inline-flex items-center border-r-2 border-gray-200 py-1 pr-3 text-sm leading-none text-gray-400 md:ml-0 lg:ml-auto">
+                                <svg class="mr-1 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                                </svg>
+                                24
+                            </span>
+                            <span class="inline-flex items-center text-sm leading-none text-gray-400">
+                                <svg class="mr-1 h-4 w-4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
+                                </svg>
+                                <%= art.comments.count %>
+                            </span>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                <% end %>
             </div>
-        </div>
-    </div>
-<% end %>
+      </div>
+    </section>
 </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_17_063508) do
+ActiveRecord::Schema.define(version: 2022_06_20_125652) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 2022_06_17_063508) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "visibility"
     t.string "version_note"
+    t.string "sub_category"
   end
 
   create_table "categories", force: :cascade do |t|

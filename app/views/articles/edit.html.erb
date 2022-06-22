@@ -1,3 +1,4 @@
+<% if current_user.role.include?("Admin") %>
 <body class="bg-indigo-50">
    <div class="bg-gray-100 border-b border-gray-300">
   <div class="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
@@ -13,3 +14,55 @@
 </div>
  <%= render 'form' %>
 </body>
+<% else  %>
+<style type="text/css">
+  .text-9xl{
+  font-size: 14rem;
+  }
+  @media(max-width: 645px){
+  .text-9xl{
+  font-size: 5.75rem;
+  }
+  .text-6xl{
+  font-size: 1.75rem;
+  }
+  .text-2xl {
+  font-size: 1rem;
+  line-height: 1.2rem;
+  }
+  .py-8 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  }
+  .px-6 {
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+  }
+  .mr-6{
+  margin-right: 0.5rem;
+  }
+  .px-12 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  }
+  }
+</style>
+</head>
+<body>
+  <div class="bg-gradient-to-r from-purple-300 to-blue-200">
+  <div class="w-9/12 m-auto py-6 min-h-screen flex items-center justify-center">
+  <div class="bg-white shadow overflow-hidden sm:rounded-lg pb-8">
+  <div class="border-t border-gray-200 text-center pt-8">
+  <h1 class="text-7xl font-bold text-red-400">403</h1>
+  <h1 class="text-3xl font-medium py-8">oops! ACCESS DENIED</h1>
+  <p class="text-2xl pb-8 px-12 font-medium">Oops, You don't have permission to access this page.</p>
+  <p class="text-xl pb-8 px-12 font-medium">
+    A web server may return a 403 Forbidden HTTP status code in response to a request from a client for a web page or resource to indicate that the server can be reached and understood the request, but refuses to take any further action. Status code 403 responses are the result of the web server being configured to deny access, for some reason, to the requested resource by the client.
+  </p>
+  <%= link_to "Back to Articles",articles_path, class:"bg-gradient-to-r from-purple-400 to-blue-500 hover:from-pink-500 hover:to-orange-500 text-white font-semibold px-6 py-3 rounded-md mr-6" %>    
+  </div>
+  </div>
+  </div>
+  </div>
+  </body>
+<% end %>

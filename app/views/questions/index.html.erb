@@ -4,9 +4,11 @@
             <div class="col-span-3 p-3 rounded overflow-y-hidden">
                     <div class="bg-white p-1 rounded-2xl shadow-md text-gray-500 ">
                         <div class="flex p-4 items-center">
-                            <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=731&amp;q=80"
-                                    alt="avatar" class="object-cover w-10 h-10 mx-4 rounded-full"> 
-
+                                    <% if current_user.avatar.attached? %>
+                                        <%= image_tag current_user.avatar,class: "object-cover w-10 h-10 mx-4 rounded-full shadow" %>
+                                    <% else %>
+                                        <img class="object-cover w-10 h-10 mx-4 rounded-full shadow" src="https://ui-avatars.com/api/?name=<%= current_user.first_name %>+<%= current_user.last_name %>&background=0D8ABC&color=fff" alt="avatar">
+                                    <% end %>
                             <div class="flex flex-1">
                                 <input type="text" placeholder="Ask a Question" class="rounded-full h-12 bg-gray-100 flex-grow px-5 focus:outline-none outline-none border-0 ">
                             </div>
@@ -104,7 +106,7 @@
                             </div>
                             <div class="mt-2">
                                 <%= link_to question.question,question_path(question),class: "text-2xl text-gray-700 font-bold hover:text-gray-600" %>
-                                <p class="mt-2 text-gray-600">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos enim reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!</p>
+                                <p class="mt-2 text-gray-600"></p>
                             </div>
                             <div class="flex justify-between items-center mt-4">
                                <div>
@@ -129,7 +131,11 @@
 
                                 <div>
                                     <a class="flex items-center" href="#">
-                                        <img class="w-10 h-10 object-cover rounded-full hidden sm:block" src="https://ui-avatars.com/api/?name=<%= User.find(question.user_id).first_name %>+<%= User.find(question.user_id).last_name %>&background=0D8ABC&color=fff" alt="avatar">
+                                        <% if question.user.avatar.attached? %>
+                                            <%= image_tag question.user.avatar,class:"w-10 h-10 object-cover rounded-full hidden sm:block shadow" %>
+                                        <% else %>
+                                            <img class="w-10 h-10 object-cover rounded-full hidden sm:block" src="https://ui-avatars.com/api/?name=<%= User.find(question.user_id).first_name %>+<%= User.find(question.user_id).last_name %>&background=0D8ABC&color=fff" alt="avatar">
+                                        <% end %>
                                         <h1 class="ml-2 text-gray-700 font-bold"><%= User.find(question.user_id).first_name %></h1>
                                     </a>
                                 </div>
