@@ -1,0 +1,2 @@
+class Visibility < ApplicationRecord
+end

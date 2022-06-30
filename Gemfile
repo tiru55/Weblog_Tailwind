@@ -31,7 +31,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 group :development, :test do
   gem 'sqlite3', '~> 1.4'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
 group :development do
@@ -48,6 +48,7 @@ end
 group :production do
   gem 'mysql2', '~> 0.5.2'
   gem 'rails_12factor'
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
 group :test do
@@ -64,3 +65,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "tailwindcss-rails", "~> 2.0"
 gem 'cancancan'
 gem "sprockets-rails"
+gem 'country_select', '~> 6.0'
+gem 'jquery-rails'

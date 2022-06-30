@@ -51,6 +51,8 @@ subcat17 = SubCategory.create(definition: "DataBase",category_id: 3)
 subcat18 = SubCategory.create(definition: "Installation",category_id: 4)
 subcat19 = SubCategory.create(definition: "Password Less",category_id: 4)
 subcat20 = SubCategory.create(definition: "Connection Issues",category_id: 4)
+visibility = Visibility.create(definition: "Public")
+visibility = Visibility.create(definition: "Private")
 puts "*"*20
 puts "Seeding done......"
 

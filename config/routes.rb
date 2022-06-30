@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
   resources :users
   get 'test', to: "pages#test"
+  get 'profile', to: "pages#profile"
   # devise_for :users do
   #   get '/profile'    => 'devise/registrations#edit',   :as => :edit_user_registration
   # end

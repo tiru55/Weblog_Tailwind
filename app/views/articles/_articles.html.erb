@@ -39,7 +39,7 @@
                                     </button>
                             </div>
                             <div class="flex items-center lg:border-l lg:border-r border-gray-300 py-3 lg:py-0 lg:px-6">
-                                <p class="text-base text-gray-600 dark:text-gray-400" id="page-view">Viewing 1 - 20 of 60</p>
+                                <p class="text-base text-gray-600 dark:text-gray-400" id="page-view">Viewing 1 - 20 of <%= @articles.count %></p>
                                 <button class="text-gray-600 dark:text-gray-400 ml-2 border-transparent border cursor-pointer rounded focus:outline-none focus:ring-2 focus:ring-gray-500 " onclick="pageView(false)" aria-label="Goto previous page " role="button">
                                     <img class="dark:hidden" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/compact_table_with_actions_and_select-svg6.svg" alt="">
                                 </button>
@@ -66,12 +66,13 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
                                   </svg>
                                 </button>
-
-                                <a  aria-label="add article" class="text-white ml-4 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 border border-transparent bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 w-8 h-8 rounded flex items-center justify-center" href="/articles/new">
-                                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                                  </svg>
-                                </a>
+                                <% if current_user.role.include?("Admin") %>
+                                     <a  aria-label="add article" class="text-white ml-4 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 border border-transparent bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 w-8 h-8 rounded flex items-center justify-center" href="/articles/new">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                    </svg>
+                                    </a>
+                                <% end %>
                             </div>
                         </div>
                     </div>
@@ -100,7 +101,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                               <% @articles.each do |article| %>
+                               <% @articles.published.each do |article| %>
                                     <tr class="h-24 border-gray-300 border-b">
                                     <td class="pl-8 pr-6 text-left whitespace-no-wrap text-sm text-gray-800 dark:text-gray-100 tracking-normal leading-4">
                                         <input placeholder="check box" type="checkbox" class="cursor-pointer relative w-5 h-5 border rounded border-gray-400 bg-white dark:bg-gray-800 focus:outline-none focus:outline-none focus:ring-2  focus:ring-gray-400" onclick="tableInteract(this)" />
@@ -128,7 +129,7 @@
                                     <td class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"><span class="text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-blue-600 text-white rounded-full"><%= article.status %></span></td>
                                     <td class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"><%= article.created_at.to_formatted_s(:short) %></td>
                                     <td class="pr-6">
-                                        <div class="w-2 h-2 rounded-full bg-indigo-600"></div>
+                                        <div class="w-2 sha h-2 rounded-full bg-indigo-600"></div>
                                     </td>
                                     <td class="pr-8">
                                     <div class="flex justify-center">
@@ -158,7 +159,7 @@
       <div class="container mx-auto px-5 py-5">
             <div class="-m-4 flex flex-wrap">
                 <!--start here-->
-                <% @articles.each do |art| %>
+                <% @articles.published.each do |art| %>
                     <div class="p-4 md:w-3/12">
                         <div class="h-full bg-white overflow-hidden rounded-lg border-2 border-gray-200 border-opacity-60">
                         <div class="w-full">
@@ -177,9 +178,9 @@
                             </div>
                         </div>
                         <% if art.banner.attached? %>
-                            <%= image_tag art.banner,class: "w-full object-cover object-center md:h-36 lg:h-48" %>
+                            <%= image_tag art.banner,class: "w-full object-cover object-center md:h-36 lg:h-48 shadow-sm" %>
                         <% else %>
-                            <img class="w-full object-cover object-center md:h-36 lg:h-48" src="https://firebasestorage.googleapis.com/v0/b/thecaffeinecode.appspot.com/o/blog.jpg?alt=media&token=271cb624-94d4-468d-a14d-455377ba75c2" alt="blog cover" />
+                            <img class="w-full object-cover object-center md:h-36 lg:h-48 shadow-sm" src="https://firebasestorage.googleapis.com/v0/b/thecaffeinecode.appspot.com/o/blog.jpg?alt=media&token=271cb624-94d4-468d-a14d-455377ba75c2" alt="blog cover" />
                         <% end %>
                         <div class="p-4">
                             <h2 class="title-font mb-1 text-xs font-bold uppercase tracking-widest text-green-400"><%= art.tags %></h2>
