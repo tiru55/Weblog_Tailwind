@@ -67,3 +67,6 @@ gem 'cancancan'
 gem "sprockets-rails"
 gem 'country_select', '~> 6.0'
 gem 'jquery-rails'
+# Gemfile
+
+gem 'simple_token_authentication', '~> 1.0' # see semver.org

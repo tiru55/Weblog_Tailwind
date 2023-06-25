@@ -1,41 +1,73 @@
-<body class="bg-">
-<div class="min-h-full flex justify-center items-center mx-5 my-5 py-12 px-4 sm:px-6 lg:px-8">
-  <div class="max-w-md space-y-8">
-    <div>
-      <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow">
-      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-        Sign in
-      </h2>
+<section class="h-full gradient-form bg-gray-200 md:h-screen">
+  <div class="container py-12 px-6 h-full">
+    <div class="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
+      <div class="xl:w-10/12 shadow-2xl">
+        <div class="block bg-white shadow-lg rounded-full">
+          <div class="lg:flex lg:flex-wrap g-0">
+            <div class="lg:w-6/12 px-4 md:px-0">
+              <div class="md:p-12 md:mx-6">
+                <div class="text-center">
+                  <img
+                    class="mx-auto w-48 mt-3"
+                    src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco,dpr_1/v1439140366/ljns3z33akr6z3xccoms.png"
+                    alt="logo"
+                  />
+                  <h4 class="text-xl font-semibold mt-3 mb-12 pb-1">Knowledge Base</h4>
+                </div>
+                <%= form_for(resource,class: "mt-8 space-y-6" ,as: resource_name, url: session_path(resource_name)) do |f| %>
+                  <p class="mb-4 justify-center">Please login to your account</p>
+                  <div class="mb-4">
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email",required: "",class: "form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-full transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",placeholder: "Username" %>
+                  </div>
+                  <div class="mb-4">
+                    <%= f.password_field :password, autocomplete: "current-password",required: "", class: "form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded-full transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",placeholder: "Password" %>
+                  </div>
+                  <div class="text-center pt-1 mb-12 pb-1">
+                  <%= f.submit "Log in",class: "inline-block px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3",style:"background: linear-gradient(
+                      to right,
+                      #ee7724,
+                      #d8363a,
+                      #dd3675,
+                      #b44593
+                    );" %>
+
+                    <a class="text-gray-500" href="#!">Forgot password?</a>
+                  </div>
+                  <div class="flex items-center justify-between pb-6">
+                    <p class="mb-0 mr-2">Don't have an account?</p>
+                    <button
+                      type="button"
+                      class="inline-block px-6 py-2 border-2 border-red-600 text-red-600 font-medium text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+                      data-mdb-ripple="true"
+                      data-mdb-ripple-color="light"
+                    >
+                      Sign Up
+                    </button>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <div
+              class="lg:w-6/12 flex items-center lg:rounded-r-lg rounded-b-lg lg:rounded-bl-none"
+              style="
+                background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+              "
+            >
+              <div class="text-white px-4 py-6 md:p-12 md:mx-6">
+                <img
+                    class="mx-auto w-50"
+                    src="https://helpiewp.com/wp-content/uploads/2018/02/Screen-Shot-2018-02-28-at-2.50.11-PM.png"
+                    alt="logo"
+                  />
+                <h4 class="text-xl font-semibold mb-6">Knowledge Base</h4>
+                <p class="text-sm">
+                  A knowledge base is a self-serve online library of information about a product, service, department, or topic. 
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <%= form_for(resource,class: "mt-8 space-y-6" ,as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="rounded-md shadow-sm -space-y-px mb-3">
-        <div>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email",required: "",class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm",placeholder: "Email address" %>
-        </div>
-        <div>
-          <%= f.password_field :password, autocomplete: "current-password",required: "",class: "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm",placeholder: "Password" %>
-        </div>
-      </div>
-
-      <div class="flex items-center justify-between mb-3">
-        <div class="flex items-center">
-          <% if devise_mapping.rememberable? %>
-           <%= f.check_box :remember_me,class: "h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" %>
-           <%= f.label :remember_me,class: "ml-2 block text-sm text-gray-900" %>
-            <% end %>
-        </div>
-
-      </div>
-
-      <div class="mb-3">
-         <%= f.submit "Sign in",class: "group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
-      </div>
-
-
-        <div class="text-center text-sm">
-                 <%= render "devise/shared/links" %>
-        </div>
-    <% end %> 
   </div>
-</div>
-</body>
+</section>
