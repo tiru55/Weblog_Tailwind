@@ -1,17 +1,67 @@
-1. git clone project_url
+# Weblog
+ Weblogger is a small blogging platform made using ruby on rails.
+## Features
 
-2. cd project
+##### Article Writing and Viewing:
 
-3. Run bundle install
+ - Users can create accounts and write articles on various topics.
+- Articles can include text, images, and possibly other media formats.
+- Users can browse and read articles written by other users.
+- Users can comment on articles.
+- Supports Image uploads for Articles
+- Rich Text Editor 
 
-4. rails db:create
+##### Question and Answer Section:
 
-5. rails db:migrate
+- Users can post questions related to the articles they read.
+- Other users can view these questions and provide answers.
+- Users can upvote/downvote questions and answers based on their relevance and helpfulness.
 
-6. rails db:seed
+### Tech Stack
+- Rails
+- HTML & CSS,Tailwind css
 
-7. rails s 
+## Installation
 
-8. sudo apt install imagemagick libvips
+Weblogger requires [Ruby](https://rvm.io/) v2.6.5 to run.
+Weblogger requires [Rails](https://rubyonrails.org/) v6.1 to run.
 
-You are good to go>>
+Run these commands in your project folder
+
+```sh
+cd Weblogger
+```
+```sh
+bundle install
+```
+
+```sh
+rails db:create
+```
+
+```sh
+rails db:migrate
+```
+
+```sh
+rails db:seed
+```
+
+```sh
+sudo apt install imagemagick libvips
+```
+
+```sh
+rails s
+```
+
+#### Open the below url in browser 
+
+```sh
+    http://localhost:3000/
+```
+
+## License
+
+MIT
+
